@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body{
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        #todos-title{
+            font-weight: bold;
+        }
+    </style>
+
+    <title>Todos</title>
+</head>
+<body>
+    <h1>My List of Tasks</h1>
+    <div id='new-todo'>
+        <form method="POST" action='/add'>
+            <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Title"
+            />
+            <input
+            type="text"
+            id="content"
+            name="content"
+            placeholder="Content"
+            />
+            <button type="submit" >Add</button>
+          </form>
+    </div>
+    <table id='todo-container'>
+        <tr id='todos-title'>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Content</td>
+            <td>Date</td>
+        </tr>
+        {% for element in todos %}
+        <tr class='todo'>
+            <td> {{ element.id }} </td>
+            <td> {{ element.title }} </td>
+            <td> {{ element.content }} </td>
+            <td> {{ element.date.strftime('%Y-%m-%d') }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
