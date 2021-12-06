@@ -12,3 +12,4 @@ class Todo(db.Model):
     title = db.Column(db.String(150))
     content = db.Column(db.String(20000))
     date = db.Column(db.DateTime, default=func.now())
+    user = db.Column(db.String(100))
