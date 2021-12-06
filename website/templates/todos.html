@@ -5,57 +5,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <style>
-        body{
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        #todos-title{
-            font-weight: bold;
-        }
-    </style>
+    <link rel='stylesheet' href='../assets/home.css'>
 
     <title>Todos</title>
 </head>
 <body>
-    <h1>My List of Tasks</h1>
-    <div id='new-todo'>
-        <form method="POST" action='/add'>
-            <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Title"
-            />
-            <input
-            type="text"
-            id="content"
-            name="content"
-            placeholder="Content"
-            />
-            <button type="submit" >Add</button>
-          </form>
-    </div>
-    <table id='todo-container'>
-        <tr id='todos-title'>
-            <td>ID</td>
-            <td>Title</td>
-            <td>Content</td>
-            <td>Date</td>
-        </tr>
+    <h1>My To Dos</h1>
+    <div id='todo-container'>
         {% for element in todos %}
-        <tr class='todo'>
-            <td> {{ element.id }} </td>
-            <td> {{ element.title }} </td>
-            <td> {{ element.content }} </td>
-            <td> {{ element.date.strftime('%Y-%m-%d') }}</td>
-        </tr>
+        <div class='todo'>
+            <h4>{{ element.title }}</h4>
+            <p><i>{{ element.content }}</i></p>
+            <p><span style='font-weight:bold'>ID: </span>{{ element.id }} - 
+            <span style='font-weight:bold'>Date: </span>{{ element.date.strftime('%Y-%m-%d') }}</p>
+        </div>
         {% endfor %}
-    </table>
+    </div>
+    
+    <div id='dashboard-container'>
+        <h2>Dashboard</h2>
+        <div id='new-todo'>
+            <h3>Add a todo (fill fields)</h3>
+            <form method="POST" action='/add'>
+                <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Title"
+                />
+                <input
+                type="text"
+                id="content"
+                name="content"
+                placeholder="Content"
+                />
+                <button type="submit" >Add</button>
+            </form>
+        </div>
+        <div id='edit-todo'>
+            <h3>Edit a todo (fill ID, then fields)</h3>
+            <form method="POST" action='/edit'>
+                <input
+                type="int"
+                id="id-edit"
+                name="id-edit"
+                placeholder="ID"
+                />
+                <input
+                type="text"
+                id="title-edit"
+                name="title-edit"
+                placeholder="Title"
+                />
+                <input
+                type="text"
+                id="content-edit"
+                name="content-edit"
+                placeholder="Content"
+                />
+                <button type="submit" >Edit</button>
+            </form>
+        </div>
+        <div id='delete-todo'>
+            <h3>Delete a todo (fill in ID)</h3>
+            <form method="POST" action='/delete'>
+                <input
+                type="text"
+                id="id-delete"
+                name="id-delete"
+                placeholder="ID"
+                />
+                <button type="submit" >Delete</button>
+            </form>
+        </div>
+    </div> 
 </body>
 </html>
